@@ -9,6 +9,7 @@ package proyectofinalp1_diegodiaz;
  * @author diego
  */
 public class Fighter {
+
     public String nombre;
     public int vida;
     public int ataque;
@@ -45,7 +46,16 @@ public class Fighter {
     public void setDefensa(int defensa) {
         this.defensa = defensa;
     }
-    
-    
-    
+
+    public Fighter(String nombre, int vida, int ataque, int defensa) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
+    }
+
+    public String toString() {
+        return "Fighter{" + "nombre=" + nombre + ", vida=" + vida + ", ataque=" + ataque + ", defensa=" + defensa + '}';
+    }
+
 }
