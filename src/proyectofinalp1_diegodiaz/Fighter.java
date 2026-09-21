@@ -9,5 +9,43 @@ package proyectofinalp1_diegodiaz;
  * @author diego
  */
 public class Fighter {
+    public String nombre;
+    public int vida;
+    public int ataque;
+    public int defensa;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
+    public int getDefensa() {
+        return defensa;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+    
+    
     
 }
