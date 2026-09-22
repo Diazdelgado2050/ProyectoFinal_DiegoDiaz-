@@ -24,7 +24,7 @@ public class ProyectoFinalP1_DiegoDiaz {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        GUI = new JFrame("Proyedto Final Lab Programacion - Diego Diaz ");
+        GUI = new JFrame("Proyecto Final Lab Programacion - Diego Diaz ");
         GUI.setSize(500, 500);
         GUI.setLayout(null);
         GUI.setLocationRelativeTo(null);// centrar pantalla
@@ -33,33 +33,75 @@ public class ProyectoFinalP1_DiegoDiaz {
         
         // Botones que van a aparecer en pantalla gui
         JButton botonAg = new JButton ("Agregar un fighter");
-        botonAg.setBounds(20, 50, 90, 100);
+        botonAg.setBounds(20, 50, 185, 30);
         GUI.add(botonAg);
 
         JButton botonLista = new JButton ("Lstar todos los fighters: ");
-        botonAg.setBounds(20, 90, 90, 100);
-        GUI.add(botonAg);
+        botonLista.setBounds(20, 100, 185, 30);
+        GUI.add(botonLista);
         
         JButton botonDelete = new JButton ("Eliminar un Fighter");
-        botonAg.setBounds(20, 150, 90, 100);
-        GUI.add(botonAg);
+        botonDelete.setBounds(20, 150, 185, 30);
+        GUI.add(botonDelete);
         
         JButton botonModF = new JButton ("Modificar un fighter");
-        botonAg.setBounds(20,190, 90, 100);
-        GUI.add(botonAg);
+        botonModF.setBounds(20,200, 185, 30);
+        GUI.add(botonModF);
         
         JButton botonID = new JButton ("Buscar por id");
-        botonAg.setBounds(20, 240, 90, 100);
-        GUI.add(botonAg);
+        botonID.setBounds(20, 250, 185, 30);
+        GUI.add(botonID);
+       
+        ventanaTexto = new JTextArea();
+        ventanaTexto.setEditable(false); // para que la ventana el usuario no la pueda editar 
+        ventanaTexto.setBounds(300, 100, 460, 300);
+        GUI.add(ventanaTexto);
         
         
         
         
+    
+    }
+    // El metodo validNumero lo estoy creando para validar que el revise si un numero se puede convertir en un entero ya que
+    // el JOPtion Pane siempre devuelve texto no numeros enteros que es lo que ocupo para que la vida, defensa, etc.
+    public static boolean validNumero(String texto){
         
+        if (texto == null || texto.length() == 0) {
+            return false;
+        }
+        int num1 = 0;
+        if (texto.charAt(0) == '-') { // si el primer caracter es negativo pasa al siguiente 
+            if (texto.length() == 1) {
+                return false;
+            }
+            num1 = 1;
+        }
+        for (int i = num1; i < texto.length(); i++) {
+            char carac = texto.charAt(i);
+            if (carac <'0' || carac > '9') { // reccore todos los caracters y si no esta entre 0 y 9 ya sabemos que no es un numero
+                return false;
+            }
+        }
         
+        // pasando la revision ya se que es valido
+        return true;
         
+    }
+    
+    
+    public static void agregarFighter(){
         
+    }
+    public static void ListaFighters(){
         
+    }
+    public static void EliminarFighter(){
+        
+    }
+    public static void modFighter(){
+        
+    }
+    public static void buscarID(){
         
     }
     
