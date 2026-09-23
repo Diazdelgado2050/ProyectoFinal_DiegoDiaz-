@@ -56,46 +56,27 @@ public class ProyectoFinalP1_DiegoDiaz {
         ventanaTexto.setEditable(false); // para que la ventana el usuario no la pueda editar 
         JScrollPane sc = new JScrollPane(ventanaTexto); // agrego barra de scroll por si ocupa scrollear por si hay muchos datos por ejmeplo en el ejer de bono q hare
         sc.setBounds(220, 50, 460, 300);
-        GUI.add(sc); 
+        GUI.add(sc);
         // y elimino la ventana de texto porq es lo mismo que la de scroll, me salian como dos ventanas.
-        
-        
 
         //Aqui agregamos los ActionListener que son los que hacen que cuando toques el boton el codigo de ese metodo se ejecute.
         botonAg.addActionListener((ActionEvent e) -> {
             agregarFighter();
         });
-        
-        botonLista.addActionListener((ActionEvent e) ->{
-        ListaFighters();
-    });
-        
-        botonDelete.addActionListener((ActionEvent e) ->{          
-        EliminarFighter();    
+
+        botonLista.addActionListener((ActionEvent e) -> {
+            ListaFighters();
         });
-        
-        
-        
-        
-        
-        
+
+        botonDelete.addActionListener((ActionEvent e) -> {
+            EliminarFighter();
+        });
+        botonModF.addActionListener((ActionEvent e) ->{
+            modFighter();
+        });
+
     }
 
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // El metodo validNumero lo estoy creando para validar que el revise si un numero se puede convertir en un entero ya que
     // el JOPtion Pane siempre devuelve texto no numeros enteros que es lo que ocupo para la vida, defensa, etc.
     public static boolean validNumero(String texto) {
@@ -146,7 +127,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             }
         }
 
-        return numero;
+        return numero; // ahora pedir numero devuelve el numero que el usuario ingreso
 
     }
 
@@ -154,8 +135,7 @@ public class ProyectoFinalP1_DiegoDiaz {
 
         boolean fighter = false;
         // Nombre
-        
-        
+
         while (!fighter) {
             boolean crearFigh = true;
 
@@ -167,8 +147,6 @@ public class ProyectoFinalP1_DiegoDiaz {
                 JOptionPane.showMessageDialog(GUI, "El nombre no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
                 crearFigh = false;
             }
-            
-            
 
             // Vida
             int vida = 0;
@@ -184,10 +162,9 @@ public class ProyectoFinalP1_DiegoDiaz {
                 }
                 if (vida < 100 || vida > 200) { // validacion que la vida debe estar entre 100 y 200
                     JOptionPane.showMessageDialog(GUI, "La vida tiene estar entre 100 y 200", "Error", JOptionPane.ERROR_MESSAGE);
-                    
+
                 }
             }
-            
 
             // Defensa
             int defensa = 0;
@@ -199,12 +176,11 @@ public class ProyectoFinalP1_DiegoDiaz {
                 if (validNumero(defensaFigh)) {
                     defensa = Integer.parseInt(defensaFigh);
                 }
-                if (defensa < 5 || defensa > 30) { 
+                if (defensa < 5 || defensa > 30) {
                     JOptionPane.showMessageDialog(GUI, "La defensa debe estar entre 5 y 30", "Error", JOptionPane.ERROR_MESSAGE);
                     crearFigh = false;
                 }
             }
-            
 
             // Ataque
             int ataque = 0;
@@ -221,50 +197,49 @@ public class ProyectoFinalP1_DiegoDiaz {
                     crearFigh = false;
                 }
             }
-            
+
             if (crearFigh) {
-                Fighter agFighter = new Fighter(nomFighter, vida,defensa,ataque);
-                JOptionPane.showInputDialog(GUI,"Fighter agregado con exito");
+                Fighter agFighter = new Fighter(nomFighter, vida, defensa, ataque);
+                JOptionPane.showInputDialog(GUI, "Fighter agregado con exito");
                 fighters.add(agFighter); // Aqui agrego Fighter a la lista, para que asi cuando le demos click al boton de lista de fighters salgan.
                 ventanaTexto.setText(agFighter.toString());
                 fighter = true;
 
-        }
+            }
 
+        }
     }
-    }
+
     public static void ListaFighters() {
-        
+
         if (fighters.isEmpty()) {
-        ventanaTexto.setText("No hay fighters disponibles"); // validacion por si no se agregan fighters
-        return;
-    }
+            ventanaTexto.setText("No hay fighters disponibles"); // validacion por si no se agregan fighters
+            return;
+        }
 
         String nomLista = "Fighters disponibles: \n";
         for (int i = 0; i < fighters.size(); i++) {
             nomLista = nomLista + (i + 1) + ". " + fighters.get(i).toString() + "\n"; // recorro la lista con el for y el i + 1 es para que empieze en 1 y no en 0
         }
         ventanaTexto.setText(nomLista);
-        
-        
 
     }
 
     public static void EliminarFighter() {
-       
+
         // Aqui volvemos a solo copiar y pegar el mismo bloque que esta arriba en el metodo lista Fighters porque ocupo la lista de los nombres otra vez aqui
         // para poder eliminarlos.
         String nomLista = "Fighters disponibles: \n";
         for (int i = 0; i < fighters.size(); i++) {
-            nomLista = nomLista + (i+1) + ". " + fighters.get(i).toString() + "\n";
+            nomLista = nomLista + (i + 1) + ". " + fighters.get(i).toString() + "\n";
 
-        } 
+        }
         // Aqui lo que se hace es que se establecen los limites usando el metodo que cree pedirNumero, con los parametros extablescidos, empzando desde 1 hasta fighter.size.
         //String, int, int, String mensaje error, ese orden tiene que llevar.
-        int numero = pedirNumero( nomLista + "\nSeleccione el numero del fighter:", 1, fighters.size(),"Ingrese un número válido");
+        int numero = pedirNumero(nomLista + "Seleccione el numero del fighter:", 1, fighters.size(), "Ingrese un número válido");
         if (numero == 0) {
             return;
-        
+
         }
         fighters.remove(numero - 1);
         JOptionPane.showMessageDialog(ventanaTexto, "Fighter eliminado con exito..");
@@ -272,6 +247,38 @@ public class ProyectoFinalP1_DiegoDiaz {
     }
 
     public static void modFighter() {
+        
+        // Aqui vuelvo a copiar el bloque de arriba de eliminar fighter ya que no hice un metodo que arme la lista de fighters y se me hace mas facil 
+        // ya solo copiarlo otra vez aqui para tener la lista de los fighters disponible
+        String nomLista = "Fighters disponibles: \n";
+        for (int i = 0; i < fighters.size(); i++) {
+            nomLista = nomLista + (i + 1) + ". " + fighters.get(i).toString() + "\n";
+
+        }
+       
+        int numero = pedirNumero(nomLista + "Seleccione el numero del fighter:", 1, fighters.size(), "Ingrese un número válido");
+        if (numero == 0) {
+            return;
+
+        }
+        
+        Fighter modificar = fighters.get(numero - 1);
+        String opmod = JOptionPane.showInputDialog(GUI,"que desea modificar del fighter? " + modificar.getNombre() + "1. Vida" + "\n 2.Ataque" + "\n3. Defensa");
+        
+        
+        // Aqui mediante if y else if establecemos los limites de vida,defensa ya ataque usando siempre el metodo pedirnumero y el mismo bloque para vida lo copiamos para ataque y defensa
+        if (opmod.equals("1")) {
+            int nuevaVida = pedirNumero("Nueva vida: ",100,200,"La vida tiene que estar entre 100 y 200");      
+        }
+        else if (opmod.equals("2")) {
+            int nuevaVida = pedirNumero("Nuevo ataque: ",10,50, "El ataque tiene que estar entre 10 y 50");
+        }
+        else if (opmod.equals("3")) {
+            int nuevaVida = pedirNumero("Nueva defensa: ",5,30,"La nueva defensa tiene que estar entre 5 y 30");
+          
+        }
+        JOptionPane.showMessageDialog(GUI, "Fighter modificado con éxito!");
+        ventanaTexto.setText("Fighter modificado:\n" + modificar.toString());
 
     }
 
@@ -279,6 +286,3 @@ public class ProyectoFinalP1_DiegoDiaz {
 
     }
 }
-
-
-
