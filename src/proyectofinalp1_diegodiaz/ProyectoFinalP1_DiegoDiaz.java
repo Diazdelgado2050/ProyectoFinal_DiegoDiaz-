@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
+import javax.swing.JScrollPane;
 
 import javax.swing.JTextArea;
 
@@ -53,16 +54,28 @@ public class ProyectoFinalP1_DiegoDiaz {
 
         ventanaTexto = new JTextArea();
         ventanaTexto.setEditable(false); // para que la ventana el usuario no la pueda editar 
-        ventanaTexto.setBounds(200, 90, 460, 300);
-        GUI.add(ventanaTexto);
+        JScrollPane sc = new JScrollPane(ventanaTexto); // agrego barra de scroll por si ocupa scrollear por si hay muchos datos por ejmeplo en el ejer de bono q hare
+        sc.setBounds(220, 50, 460, 300);
+        GUI.add(sc); 
+        // y elimino la ventana de texto porq es lo mismo que la de scroll, me salian como dos ventanas.
+        
         
 
         //Aqui agregamos los ActionListener que son los que hacen que cuando toques el boton el codigo de ese metodo se ejecute.
         botonAg.addActionListener((ActionEvent e) -> {
             agregarFighter();
         });
-
+        
+        botonLista.addActionListener((ActionEvent e) ->{
+        ListaFighters();
+    });
+        
+        
+        
+        
     }
+
+    
 
     
     
@@ -165,7 +178,7 @@ public class ProyectoFinalP1_DiegoDiaz {
                 }
                 if (vida < 100 || vida > 200) { // validacion que la vida debe estar entre 100 y 200
                     JOptionPane.showMessageDialog(GUI, "La vida tiene estar entre 100 y 200", "Error", JOptionPane.ERROR_MESSAGE);
-                    fighter = false;
+                    
                 }
             }
             
@@ -173,7 +186,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             // Defensa
             int defensa = 0;
             if (crearFigh) {
-                String defensaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la defensa del fighter (5 - 30)");
+                String defensaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la defensa del fighter");
                 if (defensaFigh == null) {
                     return;
                 }
@@ -190,7 +203,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             // Ataque
             int ataque = 0;
             if (crearFigh) {
-                String ataqueFigh = JOptionPane.showInputDialog(GUI, "Ingrese el ataque del fighter (10 - 50)");
+                String ataqueFigh = JOptionPane.showInputDialog(GUI, "Ingrese el ataque del fighter");
                 if (ataqueFigh == null) {
                     return;
                 }
@@ -206,6 +219,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             if (crearFigh) {
                 Fighter agFighter = new Fighter(nomFighter, vida,defensa,ataque);
                 JOptionPane.showInputDialog(GUI,"Fighter agregado con exito");
+                fighters.add(agFighter); // Aqui agrego Fighter a la lista, para que asi cuando le demos click al boton de lista de fighters salgan.
                 ventanaTexto.setText(agFighter.toString());
                 fighter = true;
 
@@ -214,6 +228,19 @@ public class ProyectoFinalP1_DiegoDiaz {
     }
     }
     public static void ListaFighters() {
+        
+        if (fighters.isEmpty()) {
+        ventanaTexto.setText("No hay fighters disponibles"); // validacion por si no se agregan fighters
+        return;
+    }
+
+        String nomLista = "Fighters disponibles: \n";
+        for (int i = 0; i < fighters.size(); i++) {
+            nomLista = nomLista + (i + 1) + ". " + fighters.get(i).toString() + "\n"; // recorro la lista con el for y el i + 1 es para que empieze en 1 y no en 0
+        }
+        ventanaTexto.setText(nomLista);
+        
+        
 
     }
 
@@ -228,5 +255,6 @@ public class ProyectoFinalP1_DiegoDiaz {
     public static void buscarID() {
 
     }
-
 }
+
+
