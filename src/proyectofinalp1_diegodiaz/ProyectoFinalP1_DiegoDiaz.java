@@ -70,6 +70,12 @@ public class ProyectoFinalP1_DiegoDiaz {
         ListaFighters();
     });
         
+        botonDelete.addActionListener((ActionEvent e) ->{          
+        EliminarFighter();    
+        });
+        
+        
+        
         
         
         
@@ -140,7 +146,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             }
         }
 
-        return 0;
+        return numero;
 
     }
 
@@ -167,7 +173,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             // Vida
             int vida = 0;
             if (crearFigh) {
-                String vidaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la vida del fighter");
+                String vidaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la vida del fighter (100 - 200)");
                 if (vidaFigh == null) {
                     return;
                 }
@@ -186,7 +192,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             // Defensa
             int defensa = 0;
             if (crearFigh) {
-                String defensaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la defensa del fighter");
+                String defensaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la defensa del fighter (5 - 30");
                 if (defensaFigh == null) {
                     return;
                 }
@@ -203,7 +209,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             // Ataque
             int ataque = 0;
             if (crearFigh) {
-                String ataqueFigh = JOptionPane.showInputDialog(GUI, "Ingrese el ataque del fighter");
+                String ataqueFigh = JOptionPane.showInputDialog(GUI, "Ingrese el ataque del fighter (10 - 50)");
                 if (ataqueFigh == null) {
                     return;
                 }
@@ -245,7 +251,24 @@ public class ProyectoFinalP1_DiegoDiaz {
     }
 
     public static void EliminarFighter() {
+       
+        // Aqui volvemos a solo copiar y pegar el mismo bloque que esta arriba en el metodo lista Fighters porque ocupo la lista de los nombres otra vez aqui
+        // para poder eliminarlos.
+        String nomLista = "Fighters disponibles: \n";
+        for (int i = 0; i < fighters.size(); i++) {
+            nomLista = nomLista + (i+1) + ". " + fighters.get(i).toString() + "\n";
 
+        } 
+        // Aqui lo que se hace es que se establecen los limites usando el metodo que cree pedirNumero, con los parametros extablescidos, empzando desde 1 hasta fighter.size.
+        //String, int, int, String mensaje error, ese orden tiene que llevar.
+        int numero = pedirNumero( nomLista + "\nSeleccione el numero del fighter:", 1, fighters.size(),"Ingrese un número válido");
+        if (numero == 0) {
+            return;
+        
+        }
+        fighters.remove(numero - 1);
+        JOptionPane.showMessageDialog(ventanaTexto, "Fighter eliminado con exito..");
+        ListaFighters();
     }
 
     public static void modFighter() {
@@ -256,5 +279,6 @@ public class ProyectoFinalP1_DiegoDiaz {
 
     }
 }
+
 
 

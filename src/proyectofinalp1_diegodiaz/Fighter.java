@@ -55,7 +55,7 @@ public class Fighter {
     }
 
     public String toString() {
-        return  "Nombre: " + nombre + "\n" +"Vida = " + vida + "\n" +  "Ataque = " + ataque + "\n" +"Defensa = " + defensa + '\n';
+        return  "Nombre: " + nombre + "\n" +"Vida : " + vida + "\n" +  "Ataque : " + ataque + "\n" +"Defensa : " + defensa + '\n';
     }
 
 }
