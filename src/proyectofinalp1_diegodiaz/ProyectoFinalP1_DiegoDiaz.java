@@ -74,6 +74,9 @@ public class ProyectoFinalP1_DiegoDiaz {
         botonModF.addActionListener((ActionEvent e) ->{
             modFighter();
         });
+        botonID.addActionListener((ActionEvent e ) ->{
+        buscarID();    
+        });
 
     }
 
@@ -256,33 +259,55 @@ public class ProyectoFinalP1_DiegoDiaz {
 
         }
        
-        int numero = pedirNumero(nomLista + "Seleccione el numero del fighter:", 1, fighters.size(), "Ingrese un número válido");
+        int numero = pedirNumero(nomLista + "\nSeleccione el numero del fighter:", 1, fighters.size(), "Ingrese un número válido");
         if (numero == 0) {
             return;
 
         }
         
         Fighter modificar = fighters.get(numero - 1);
-        String opmod = JOptionPane.showInputDialog(GUI,"que desea modificar del fighter? " + modificar.getNombre() + "1. Vida" + "\n 2.Ataque" + "\n3. Defensa");
+        String opmod = JOptionPane.showInputDialog(GUI,"que desea modificar del fighter? \n" + modificar.getNombre() + "1. Vida" + "\n 2.Ataque" + "\n3. Defensa");
         
         
         // Aqui mediante if y else if establecemos los limites de vida,defensa ya ataque usando siempre el metodo pedirnumero y el mismo bloque para vida lo copiamos para ataque y defensa
         if (opmod.equals("1")) {
-            int nuevaVida = pedirNumero("Nueva vida: ",100,200,"La vida tiene que estar entre 100 y 200");      
+            int nuevaVida = pedirNumero("Nueva vida: ",100,200,"La vida tiene que estar entre 100 y 200");
+            if (nuevaVida == 0) {
+                return;
+            }
         }
         else if (opmod.equals("2")) {
-            int nuevaVida = pedirNumero("Nuevo ataque: ",10,50, "El ataque tiene que estar entre 10 y 50");
+            int nuevoAtaque = pedirNumero("Nuevo ataque: ",10,50, "El ataque tiene que estar entre 10 y 50");
+            if (nuevoAtaque == 0) {
+                return;
+            }
         }
         else if (opmod.equals("3")) {
-            int nuevaVida = pedirNumero("Nueva defensa: ",5,30,"La nueva defensa tiene que estar entre 5 y 30");
+            int nuevadefensa = pedirNumero("Nueva defensa: ",5,30,"La nueva defensa tiene que estar entre 5 y 30");
+            if (nuevadefensa == 0) {
+                return;
+            }
           
         }
-        JOptionPane.showMessageDialog(GUI, "Fighter modificado con éxito!");
+        JOptionPane.showMessageDialog(GUI, "Fighter modificado con exito!!");
         ventanaTexto.setText("Fighter modificado:\n" + modificar.toString());
 
     }
 
     public static void buscarID() {
+        
+    // En este metodo es el mas corto ya que el metodo pedirnumero me ayuda bastante
+        int numero = pedirNumero("\nIngrese el numero del fighter que desea buscar:", 1, fighters.size(), "Ingrese un numero valido");
+        if (numero == 0) {
+            return;
 
+            
+    }
+        Fighter modificar = fighters.get(numero - 1);
+        ventanaTexto.setText("Fighter encontrado !!: \n" + modificar.getNombre());
+    }
+    
+    public static void bonus(){
+        
     }
 }
