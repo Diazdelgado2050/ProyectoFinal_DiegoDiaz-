@@ -275,19 +275,21 @@ public class ProyectoFinalP1_DiegoDiaz {
             if (nuevaVida == 0) {
                 return;
             }
+            modificar.setVida(nuevaVida); // Aqui arreglamos el error de que cuando ponias el nuevo valor de lo que querias cambiar no actualizaba por que no lo guarde en el objeto en el setter
         }
         else if (opmod.equals("2")) {
             int nuevoAtaque = pedirNumero("Nuevo ataque: ",10,50, "El ataque tiene que estar entre 10 y 50");
             if (nuevoAtaque == 0) {
                 return;
             }
+            modificar.setAtaque(nuevoAtaque); // lo mismo que set vida
         }
         else if (opmod.equals("3")) {
             int nuevadefensa = pedirNumero("Nueva defensa: ",5,30,"La nueva defensa tiene que estar entre 5 y 30");
             if (nuevadefensa == 0) {
                 return;
             }
-          
+          modificar.setDefensa(nuevadefensa); // lo mismo que setvida
         }
         JOptionPane.showMessageDialog(GUI, "Fighter modificado con exito!!");
         ventanaTexto.setText("Fighter modificado:\n" + modificar.toString());
@@ -308,6 +310,21 @@ public class ProyectoFinalP1_DiegoDiaz {
     }
     
     public static void bonus(){
+        
+        if (fighters.size() < 2) {
+            ventanaTexto.setText("Se necesitan 2 fighters para iniciar la simulacion"); // validamos la creacion obligatoria de dos fighters si no mo pasa
+            return;
+        }
+
+        String  disponibles = "Fighters disponibles: "; // como siempre ponemos el bloque del la lista de fifhters
+        for (int i = 0; i < fighters.size(); i++) {
+          disponibles  = disponibles + (i + 1) + ". " + fighters.get(i).getNombre() + " (vida: )" + fighters.get(i).getVida();
+        }
+
+        int numero1 = pedirNumero(disponibles + " Elige el numero de tu fighter:", 1, fighters.size(), "Ingrese un numero valido");
+        if (numero1 == 0) {
+            return;
+        }
         
     }
 }
