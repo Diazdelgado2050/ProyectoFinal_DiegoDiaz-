@@ -51,6 +51,10 @@ public class ProyectoFinalP1_DiegoDiaz {
         JButton botonID = new JButton("Buscar por id");
         botonID.setBounds(20, 250, 185, 30);
         GUI.add(botonID);
+        
+        JButton botonBonus = new JButton("Simular batalla");
+        botonBonus.setBounds(20, 300, 185, 30);
+        GUI.add(botonBonus);
 
         ventanaTexto = new JTextArea();
         ventanaTexto.setEditable(false); // para que la ventana el usuario no la pueda editar 
@@ -76,6 +80,9 @@ public class ProyectoFinalP1_DiegoDiaz {
         });
         botonID.addActionListener((ActionEvent e ) ->{
         buscarID();    
+        });
+        botonBonus.addActionListener((ActionEvent e) -> {
+            bonus();
         });
 
     }
@@ -322,9 +329,75 @@ public class ProyectoFinalP1_DiegoDiaz {
         }
 
         int numero1 = pedirNumero(disponibles + " Elige el numero de tu fighter:", 1, fighters.size(), "Ingrese un numero valido");
-        if (numero1 == 0) {
+        if (numero1 == 0) { // aqui el usuario elige el fighter q va a usar
             return;
         }
+        Fighter fighter1 = fighters.get(numero1 - 1);
+
+        
+        int numero2 = numero1;
+        while (numero2 == numero1) {
+            numero2 = (int) (Math.random() * fighters.size()) + 1; // aqui se elige aleatoriamente entre los fighters que crees para que pelee contra el tuyo  
+        }
+
+        Fighter fighter2 = fighters.get(numero2 - 1);
+
+        JOptionPane.showMessageDialog(GUI, "Tu rival sera: " + fighter2.getNombre());
+
+        int vida1 = fighter1.getVida();
+        int vida2 = fighter2.getVida();
+        String textobatalla = "";
+        int turno = 1;
+        boolean turnoDeFighter1 = true;
+
+        while (vida1 > 0 && vida2 > 0) {
+            if (turnoDeFighter1) {
+                int daño = fighter1.getAtaque() - fighter2.getDefensa();
+                if (daño < 1) {
+                    daño = 1;
+                }
+                vida2 = vida2 - daño;
+                if (vida2 < 0) {
+                    vida2 = 0;
+                }
+                textobatalla = textobatalla + "Turno " + turno + ": " + fighter1.getNombre() + " ataca a " + fighter2.getNombre() + " con " + daño + " de daño " + fighter2.getNombre() + " vida: " + vida2 + "\n";
+            } else {
+                int daño = fighter2.getAtaque() - fighter1.getDefensa();
+                if (daño < 1) {
+                    daño = 1;
+                }
+                vida1 = vida1 - daño;
+                if (vida1 < 0) {
+                    vida1 = 0;
+                }
+                textobatalla = textobatalla + "Turno " + turno + ":" + fighter2.getNombre() + " ataca a " + fighter1.getNombre() + " con " + daño + " de daño " + fighter1.getNombre() + " vida: " + vida1 + "\n";
+            }
+
+            ventanaTexto.setText(textobatalla);
+
+            turno = turno + 1;
+            turnoDeFighter1 = !turnoDeFighter1;
+        }
+
+        String ganador;
+        String perdedor;
+        int vidaGanador;
+
+        if (vida1 <= 0) {
+            perdedor = fighter1.getNombre();
+            ganador = fighter2.getNombre();
+            vidaGanador = vida2;
+        } else {
+            perdedor = fighter2.getNombre();
+            ganador = fighter1.getNombre();
+            vidaGanador = vida1;
+        }
+
+        textobatalla = textobatalla + perdedor + " ha sido derrotado " + ganador + " es el ganador con " + vidaGanador + " de vida";
+        ventanaTexto.setText(textobatalla);
+
+        JOptionPane.showMessageDialog(GUI, ganador + " ha ganado la pelea");
+    }
         
     }
-}
+
