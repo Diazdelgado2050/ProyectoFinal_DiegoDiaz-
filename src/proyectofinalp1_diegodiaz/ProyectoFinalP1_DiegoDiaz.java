@@ -36,7 +36,7 @@ public class ProyectoFinalP1_DiegoDiaz {
         botonAg.setBounds(20, 50, 185, 30);
         GUI.add(botonAg);
 
-        JButton botonLista = new JButton("Lstar todos los fighters: ");
+        JButton botonLista = new JButton("Listar todos los fighters: ");
         botonLista.setBounds(20, 100, 185, 30);
         GUI.add(botonLista);
 
@@ -179,7 +179,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             // Defensa
             int defensa = 0;
             if (crearFigh) {
-                String defensaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la defensa del fighter (5 - 30");
+                String defensaFigh = JOptionPane.showInputDialog(GUI, "Ingrese la defensa del fighter (5 - 30)");
                 if (defensaFigh == null) {
                     return;
                 }
