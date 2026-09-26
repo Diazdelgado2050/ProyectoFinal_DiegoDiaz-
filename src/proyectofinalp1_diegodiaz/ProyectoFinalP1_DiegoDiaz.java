@@ -24,6 +24,9 @@ public class ProyectoFinalP1_DiegoDiaz {
 
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        
+        
 
         GUI = new JFrame("Proyecto Final Lab Programacion - Diego Diaz ");
         GUI.setSize(700, 480);
@@ -210,7 +213,7 @@ public class ProyectoFinalP1_DiegoDiaz {
 
             if (crearFigh) {
                 Fighter agFighter = new Fighter(nomFighter, vida, defensa, ataque);
-                JOptionPane.showInputDialog(GUI, "Fighter agregado con exito");
+                JOptionPane.showMessageDialog(GUI, "Fighter agregado con exito");// cambio a message dialog porque me ponia la cajita para incertar texto ahora solo sale el ok
                 fighters.add(agFighter); // Aqui agrego Fighter a la lista, para que asi cuando le demos click al boton de lista de fighters salgan.
                 ventanaTexto.setText(agFighter.toString());
                 fighter = true;
@@ -273,7 +276,7 @@ public class ProyectoFinalP1_DiegoDiaz {
         }
         
         Fighter modificar = fighters.get(numero - 1);
-        String opmod = JOptionPane.showInputDialog(GUI,"que desea modificar del fighter? \n" + modificar.getNombre() + "1. Vida" + "\n 2.Ataque" + "\n3. Defensa");
+        String opmod = JOptionPane.showInputDialog(GUI,"que desea modificar del fighter? \n" + modificar.getNombre() +"\n" + "1. Vida" + "\n 2.Ataque" + "\n3. Defensa");
         
         
         // Aqui mediante if y else if establecemos los limites de vida,defensa ya ataque usando siempre el metodo pedirnumero y el mismo bloque para vida lo copiamos para ataque y defensa
@@ -323,12 +326,12 @@ public class ProyectoFinalP1_DiegoDiaz {
             return;
         }
 
-        String  disponibles = "Fighters disponibles: "; // como siempre ponemos el bloque del la lista de fifhters
+        String  disponibles = "Fighters disponibles: \n"; // como siempre ponemos el bloque del la lista de fifhters
         for (int i = 0; i < fighters.size(); i++) {
-          disponibles  = disponibles + (i + 1) + ". " + fighters.get(i).getNombre() + " (vida: )" + fighters.get(i).getVida();
+          disponibles  = disponibles + (i + 1) + ". " + fighters.get(i).getNombre()+ "-->" + " vida: " + fighters.get(i).getVida()+ "\n";
         }
 
-        int numero1 = pedirNumero(disponibles + " Elige el numero de tu fighter:", 1, fighters.size(), "Ingrese un numero valido");
+        int numero1 = pedirNumero(disponibles + "\nElige el numero de tu fighter:", 1, fighters.size(), "Ingrese un numero valido");
         if (numero1 == 0) { // aqui el usuario elige el fighter q va a usar
             return;
         }
@@ -393,7 +396,7 @@ public class ProyectoFinalP1_DiegoDiaz {
             vidaGanador = vida1;
         }
 
-        textobatalla = textobatalla + perdedor + " ha sido derrotado " + ganador + " es el ganador con " + vidaGanador + " de vida";
+        textobatalla = textobatalla + "\n" + perdedor + " ha sido derrotado " + ganador + " es el ganador con " + vidaGanador + " de vida";
         ventanaTexto.setText(textobatalla);
 
         JOptionPane.showMessageDialog(GUI, ganador + " ha ganado la pelea");
